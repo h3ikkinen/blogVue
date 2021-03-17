@@ -7,8 +7,8 @@
                         Sign Up
                     </h1>
                     <p class="text-xs-center">
-                        <router-link :to="{name: 'login'}" >
-                            Have an account?
+                        <router-link :to="{name: 'register'}" >
+                            Need an account?
                         </router-link>
                     </p>
                     <McvValidationErrors 
@@ -16,13 +16,6 @@
                         :validation-errors="validationErrors"
                     />
                     <form @submit.prevent="onSubmit">
-                        <fieldset class="form-group">
-                            <input  type="text" 
-                                    class="form-control form-control-lg"
-                                    placeholder="Username"
-                                    v-model="username"
-                            />
-                        </fieldset>
                         <fieldset class="form-group">
                             <input  type="text" 
                                     class="form-control form-control-lg"
@@ -41,7 +34,7 @@
                             class="btn btn-lg btn-primary pull-xs-right"
                             :disabled="isSubmitting"
                         >
-                            Sign up!
+                            Sign in!
                         </button>
                     </form>
                 </div>
@@ -58,7 +51,7 @@ import {actionsTypes} from '@/store/modules/auth'
 import {mapState} from 'vuex';
 
 export default {
-    name: 'McvRegister',
+    name: 'McvLogin',
     components: {
         McvValidationErrors,
     }, 
@@ -66,7 +59,6 @@ export default {
         return {
             email: '',
             password: '',
-            username: '', 
         }
     },
     computed: {
@@ -78,13 +70,11 @@ export default {
     methods: {
         onSubmit() {
             this.$store
-                .dispatch(actionsTypes.register, {
+                .dispatch(actionsTypes.login, {
                     email: this.email,
-                    username: this.username,
                     password: this.password
                 }
-                ).then(user => {
-                    console.log('succeffulle register user', user)
+                ).then(() => {
                     this.$router.push({name: 'home'})
                 })
         },
