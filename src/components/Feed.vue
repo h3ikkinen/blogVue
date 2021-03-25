@@ -1,11 +1,7 @@
 <template>
     <div>
-        <div v-if="isLoading">
-            Loading...
-        </div>
-        <div v-if="errors">
-            Somethink bad happened
-        </div>
+        <mcv-loader  v-if="isLoading"/>
+        <mcv-message v-if="errors" />
         <div v-if="feed">
             <div 
                 class="article-preview"
@@ -53,7 +49,7 @@
                         {{ article.description }}
                     </p>
                     <span>Read more...</span>
-                    TAG LIST
+                    <mcv-tag-list :tags="article.tagList"/>
                 </router-link>
             </div>
             <mcv-pagination 
@@ -72,7 +68,9 @@ import {mapGetters} from 'vuex'
 import McvPagination from '@/components/Pagination'
 import {limit} from '@/helpers/variables'
 import {stringify, parseUrl} from 'query-string'
-
+import McvLoader from '@/components/Loading'
+import McvMessage from '@/components/Message'
+import McvTagList from '@/components/ArticleTags'
 export default {
 
     name: 'McvFeed',
@@ -83,7 +81,10 @@ export default {
         }
     },
     components: {
-        McvPagination
+        McvPagination,
+        McvLoader,
+        McvMessage,
+        McvTagList
     },
     data() {
         return {

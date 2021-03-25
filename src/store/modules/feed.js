@@ -4,16 +4,18 @@ const state = {
     data: null,
     isLoading: false,
     errors: null,
+    tags: null,
 }
 
 export const mutationTypes = {
     getFeedStart: '[feed] getFeedStart',
     getFeedSucces: '[feed] getFeedSucces',
     getFeedFailure: '[feed] getFeedFailure',
+
 }
 
 export const actionsTypes = {
-    getFeed: '[feed] getFeed'
+    getFeed: '[feed] getFeed',
 }
 
 const mutations = {
@@ -27,7 +29,7 @@ const mutations = {
     },
     [mutationTypes.getFeedFailure](state) {
         state.isLoading = false;
-    }
+    },
 }
 
 const actions = {
